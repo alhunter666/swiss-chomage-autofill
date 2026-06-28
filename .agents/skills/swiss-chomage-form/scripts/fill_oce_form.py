@@ -161,7 +161,18 @@ if __name__ == "__main__":
     # Locate template and output paths.
     # We resolve paths relative to the current working directory.
     template_abs = os.path.abspath(args.template)
-    output_abs = os.path.abspath(args.output)
+    
+    # Automatically output to a Month-Year subdirectory if the output is a filename.
+    if os.path.basename(args.output) == args.output:
+        import calendar
+        month_name = calendar.month_name[args.month]
+        folder_name = f"{month_name}-{args.year}"
+        output_dir = os.path.join(os.getcwd(), folder_name)
+        os.makedirs(output_dir, exist_ok=True)
+        output_abs = os.path.join(output_dir, args.output)
+    else:
+        output_abs = os.path.abspath(args.output)
+        os.makedirs(os.path.dirname(output_abs), exist_ok=True)
     
     days_list = [int(d.strip()) for d in args.days.split(",") if d.strip()]
     
