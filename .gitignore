@@ -1,0 +1,13 @@
+# Ignore private environment configurations
+.env
+
+# Ignore generated PDFs and any downloaded documents/receipts
+*.pdf
+*receipt*
+*décompte*
+*Décompte*
+
+# Ignore python caches and local test virtual environments
+__pycache__/
+*.pyc
+venv/
